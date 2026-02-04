@@ -1,4 +1,4 @@
-# # # num1=int(input("Enter num1: "))
+# type: ignore # # # num1=int(input("Enter num1: "))
 # # # num2=int(input("Enter num2: "))
 # # # operation = input("Enter operation (+, -, *, /, **, %): ")
 # # # if operation == "+":
