@@ -20,7 +20,7 @@
 # # msg="welcome"
 # # print(f"hi {name},{msg}everyone")
 
-#  task-1
+ task-1
 print("TASK 1")
 name = input("Enter your name: ")
 age = float(input("enter your age: "))
@@ -35,7 +35,7 @@ People =int(input("Enter the number of the peoples : "))
 share=Amount/People
 print(f'Total Bill : {Amount}. Each person pays: {share:.2f}')
 
-#task-3
+# task-3
 print("TASK 3")
 item_name="Mobile"
 quantity=4
