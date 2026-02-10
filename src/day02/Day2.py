@@ -16,9 +16,9 @@
 # # # print("Result:", result)
 
 
-# # name="sharath"
-# # msg="welcome"
-# # print(f"hi {name},{msg}everyone")
+name="sharath"
+msg="welcome"
+print(f"hi {name},{msg}everyone")
 
  task-1
 print("TASK 1")
