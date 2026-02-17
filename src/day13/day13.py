@@ -197,11 +197,11 @@ import numpy as np
 
 
 data = {
-    "House_ID": [101,201,302,423,512,643,789,844,923,109],
-    "City": ["vijayanagar","sirsinakallu","tuggaldhoni","bellary","taranagar",
-             "hampi","dharwad","manglore","neerumarga","sandur"],
-    "Price": [150000,2270000,30000,390000,210000,
-              630000,8400000,490000,950000,800000]
+    "House_ID": [101,201,302,423,512,643,789,844],
+    "City": ["vijayanagar","sirsinakallu","tuggaldhoni","taranagar",
+             "vijayanagar","tuggaldhoni","sirsinakallu","taranagar"],
+    "Price": [15000,70000,30000,39000,
+              63000,84000,49000,95000,]
 }
 
 df = pd.DataFrame(data)
@@ -211,7 +211,7 @@ df.to_csv("housing_prices.csv", index=False)
 
 print("CSV file created successfully")
 # Loading of the dataset
-df = pd.read_csv("housing.csv")
+df = pd.read_csv("housing_prices.csv")
 
 
 plt.figure(figsize=(8,5))
@@ -238,3 +238,134 @@ sns.countplot(x=df["City"])
 plt.title("Count of Houses by City")
 plt.xticks(rotation=45)
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("task-2,relationship map")
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+data = {
+    "House_ID": [1,2,3,4,5,6,7,8,9,10],
+    "SquareFoot": [800,1000,1200,1500,1800,2000,2200,2500,2700,3000],
+    "Price": [120000,150000,200000,250000,300000,320000,360000,420000,450000,500000],
+    "LocationType": ["Rural","Rural","Suburban","Suburban","Urban",
+                     "Urban","Urban","Urban","Suburban","Urban"]
+}
+
+df = pd.DataFrame(data)
+
+# Save the CSV
+df.to_csv("housing_size_price.csv", index=False)
+
+print("CSV file saved successfully")
+
+
+# Loadig the dataset
+df = pd.read_csv("housing_size_price.csv")
+
+#Scatter Plot (Numerical vs Numerical)
+
+plt.figure(figsize=(8,5))
+sns.scatterplot(x=df["SquareFoot"], y=df["Price"])
+plt.title("SquareFoot vs Price")
+plt.xlabel("Square Foot")
+plt.ylabel("Price")
+plt.show()
+
+
+#Boxplot (Categorical vs Numerical)
+
+plt.figure(figsize=(8,5))
+sns.boxplot(x=df["LocationType"], y=df["Price"])
+plt.title("LocationType vs Price")
+plt.xticks(rotation=45)
+plt.show()
+
+print("\---sample insights of dataset---")
+print("1-price increases with squarefoot and locationType(positive correlation)")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("task-3,pattern finder")
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+    "Price": [1500,2200,2800,3200,3500,4800,4000,4500,6200,7500,9200,2600],
+    "City": ["hospet","hampi","mysore","hubali","mysore",
+             "hospet","mysore","mangaluru","hospet","hospet","hampi","mysuru",],
+    "SquareFoot": [600,700,800,900,650,1000,850,950,1100,1300,1500,750],
+    "Rooms": [1,2,2,3,2,3,3,3,3,4,4,2]
+}
+
+df = pd.DataFrame(data)
+
+df.to_csv("housing.csv", index=False)
+
+print("CSV file saved successfully")
+        
+
+df = pd.read_csv('housing.csv')
+sns.set(style='whitegrid')
+
+#Correlation
+correlation = df.corr(numeric_only=True)
+sns.heatmap(correlation, annot =True, cmap='coolwarm')
+plt.show()
+
+corr_matrix = df.corr(numeric_only=True)
+print("\nCorrelation Matrix:")
+print(corr_matrix)
+
+# Box-Plot 
+sns.boxplot(df['Price'])
+plt.show()
+
+print(df.describe())
+
+
