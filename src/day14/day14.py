@@ -132,3 +132,187 @@ print("\nFinal Feature Shape:", X_train_poly.shape)
 
 print("\nFeature Engineering Completed Successfully!")
 # ==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("task-1,categorical converter")
+
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+# Creation of sample dataset
+data = {
+    "Transmission": ["Automatic", "Manual", "Automatic", "Manual"],
+    "Color": ["Red", "Blue", "Green", "Red"]
+}
+
+df = pd.DataFrame(data)
+
+print("Original Data:\n")
+print(df)
+
+
+# Label Encoding for Transmission
+le = LabelEncoder()
+df["Transmission"] = le.fit_transform(df["Transmission"])
+
+
+# One-Hot Encoding for Color 
+df = pd.get_dummies(df, columns=["Color"], drop_first=True)
+
+print("\nEncoded Data:\n")
+print(df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("task-2,leveling field")
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+#  Creation of the dataset
+data = {
+    "Age": [22, 25, 30, 35, 40, 28, 32, 45, 50, 29],
+    "Salary": [25000, 30000, 50000, 70000, 90000, 45000, 60000, 120000, 150000, 52000]
+}
+
+df = pd.DataFrame(data)
+
+# Standardization (Mean=0, Std=1)
+standard_scaler = StandardScaler()
+df_standardized = pd.DataFrame(
+    standard_scaler.fit_transform(df),
+    columns=df.columns
+)
+
+# Normalization (0 to 1 range)
+minmax_scaler = MinMaxScaler()
+df_normalized = pd.DataFrame(
+    minmax_scaler.fit_transform(df),
+    columns=df.columns
+)
+
+# Plot Histograms
+
+# Original Salary
+plt.figure()
+plt.hist(df["Salary"], bins=5)
+plt.title("Original Salary Distribution")
+plt.xlabel("Salary")
+plt.ylabel("Frequency")
+plt.show()
+
+# Standardized Salary
+plt.figure()
+plt.hist(df_standardized["Salary"], bins=5)
+plt.title("Standardized Salary (Mean=0, Std=1)")
+plt.xlabel("Standardized Salary")
+plt.ylabel("Frequency")
+plt.show()
+
+# Normalized Salary
+plt.figure()
+plt.hist(df_normalized["Salary"], bins=5)
+plt.title("Normalized Salary (0 to 1 Range)")
+plt.xlabel("Normalized Salary")
+plt.ylabel("Frequency")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("task-3,complexity creator")
+
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.metrics import r2_score
+from sklearn.model_selection import train_test_split
+
+
+# Create Non-Linear Data
+
+np.random.seed(0)
+
+X = np.linspace(-5, 5, 100).reshape(-1, 1)
+y = 3 * X**2 + 2 * X + 5 + np.random.randn(100, 1) * 5   # Quadratic relationship
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+#Linear Regression
+
+linear_model = LinearRegression()
+linear_model.fit(X_train, y_train)
+
+y_pred_linear = linear_model.predict(X_test)
+r2_linear = r2_score(y_test, y_pred_linear)
+
+#Polynomial Features (degree=2)
+
+poly = PolynomialFeatures(degree=2)
+X_train_poly = poly.fit_transform(X_train)
+X_test_poly = poly.transform(X_test)
+
+poly_model = LinearRegression()
+poly_model.fit(X_train_poly, y_train)
+
+y_pred_poly = poly_model.predict(X_test_poly)
+r2_poly = r2_score(y_test, y_pred_poly)
+
+
+print("R² Score (Linear Regression - Original Feature):", r2_linear)
+print("R² Score (Linear Regression - Polynomial Features):", r2_poly)
